@@ -1,7 +1,7 @@
 ;(async () => {
   const utter = new SpeechSynthesisUtterance()
   utter.lang = 'ja-JP'
-  const response = await fetch('http://atdym.feelmy.net/add', {
+  const response = await fetch('https://atdym.feelmy.net/add', {
     method: 'POST',
     body: JSON.stringify({
       user: `${props.list[0].user}`,

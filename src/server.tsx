@@ -1,5 +1,6 @@
 import type { Database } from '@cloudflare/d1'
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
 import { serveStatic } from 'hono/serve-static.module'
 import { validator } from 'hono/validator'
 import React from 'react'
@@ -16,6 +17,9 @@ import Welcome from './Welcome'
 
 const app = new Hono<{ Bindings: Env }>()
 app.use('/static/*', serveStatic())
+app.use('/{add|remove}', cors({
+  origin: '*'
+}))
 
 app.get('/', async (c) => {
   const content = ReactDOMServer.renderToString(<Welcome id={uuidv4()} />)
