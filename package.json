@@ -1,0 +1,35 @@
+{
+  "name": "atdym",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "ebith <ebith.h@gmail.com>",
+  "main": "src/server.tsx",
+  "scripts": {
+    "build": "esbuild --bundle src/client.tsx --outfile=public/static/client.js --minify && postcss ./src/input.css -o ./public/static/style.css",
+    "deploy": "wrangler publish src/server.tsx",
+    "dev": "yarn dev-css & yarn dev-js",
+    "dev-js": "esbuild --bundle src/client.tsx --outfile=public/static/client.js && NO_D1_WARNING=true wrangler dev src/server.tsx --local --persist",
+    "dev-css": "tailwindcss -i src/input.css -o public/static/style.css --watch"
+  },
+  "dependencies": {
+    "hono": "^2.5.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/d1": "^1.4.1",
+    "@cloudflare/workers-types": "^3.18.0",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "autoprefixer": "^10.4.13",
+    "better-sqlite3": "7.6.2",
+    "cssnano": "^5.1.14",
+    "daisyui": "^2.41.0",
+    "esbuild": "^0.15.14",
+    "postcss-cli": "^10.0.0",
+    "postcss-nested": "^6.0.0",
+    "tailwindcss": "^3.2.4",
+    "wrangler": "^2.4.0"
+  }
+}

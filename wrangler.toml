@@ -1,0 +1,13 @@
+name = "atdym"
+main = "src/server.tsx"
+
+compatibility_date = "2022-10-14"
+compatibility_flags = ["streams_enable_constructors"]
+
+[site]
+bucket = "./public"
+
+[[ d1_databases ]]
+binding = "DB"
+database_name = "atdym"
+database_id = "aef41455-2986-432b-8db5-3149487f3b8c"
