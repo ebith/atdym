@@ -1,5 +1,11 @@
 # Atdym
 
+## 使い方
+### [Feedeen](https://www.feedeen.com/)
+- 詳細設定 > 外部サービス > Webhook
+- 送信先URL: https://atdym.feelmy.net/add
+- 送信内容: { "title": "${title}", "url": "${url}", "user": "ユーザID" }
+
 ## メモ 
 ```sh
 yarn install
@@ -16,5 +22,5 @@ yarn wrangler d1 execute atdym --file ./data/createIndex.sql
 yarn wrangler publish
 ```
 
-- 使い方が使い方じゃない
 - RSS出力モードがあっても良いかもしれない
+- iOSはユーザの操作無しに読み上げが機能しないのでBookmarkletが動作したかわからない
