@@ -32,7 +32,6 @@ const Footer = (props) => {
                 url.searchParams.append('mode', 'share')
               }
               node && node.setAttribute('href', `${url.href}`)
-              console.log(url)
             }}
           >
             共有向けURL
