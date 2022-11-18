@@ -1,5 +1,6 @@
 import type { Database } from '@cloudflare/d1'
 import { Hono } from 'hono'
+import { cache } from 'hono/cache'
 import { cors } from 'hono/cors'
 import { serveStatic } from 'hono/serve-static.module'
 import { validator } from 'hono/validator'
@@ -20,6 +21,8 @@ app.use('/static/*', serveStatic())
 app.use('/{add|remove}', cors({
   origin: '*'
 }))
+
+app.get('*', cache({ cacheName: 'atdym', cacheControl: 'public, max-age=31536000, immutable' }))
 
 app.get('/', async (c) => {
   const content = ReactDOMServer.renderToString(<Welcome id={uuidv4()} />)
