@@ -10,4 +10,4 @@ bucket = "./public"
 [[ d1_databases ]]
 binding = "DB"
 database_name = "atdym"
-database_id = "aef41455-2986-432b-8db5-3149487f3b8c"
+database_id = "0ab882db-69bb-4ece-8180-2312ae38f50f"
