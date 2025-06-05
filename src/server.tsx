@@ -10,10 +10,6 @@ import App from './App'
 import Html from './Html'
 import Welcome from './Welcome'
 
-type Bindings = {
-  DB: Database
-}
-
 interface Env {
   DB: Database
 }
