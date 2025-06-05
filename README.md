@@ -6,6 +6,26 @@
 - 送信先URL: https://atdym.feelmy.net/add
 - 送信内容: { "title": "${title}", "url": "${url}", "user": "ユーザID" }
 
+### [tridactyl](https://github.com/tridactyl/tridactyl)
+```javascript
+;(async () => {
+  const title = document.getSelection().toString() || document.title || document.location.href
+  const response = await fetch('https://atdym.feelmy.net/add', {
+    method: 'POST',
+    body: JSON.stringify({
+      user: 'ユーザID',
+      url: document.location.href,
+      title,
+    }),
+  })
+  if (response.status === 200) {
+    fillcmdline_nofocus(`Added: ${title}`)
+  } else {
+    fillcmdline_nofocus('Request failed')
+  }
+})()
+```
+
 ## メモ 
 ```sh
 yarn install
@@ -24,3 +44,5 @@ yarn wrangler publish
 
 - RSS出力モードがあっても良いかもしれない
 - iOSはユーザの操作無しに読み上げが機能しないのでBookmarkletが動作したかわからない
+  - ショートカット.appでHTTP POSTする手が使える
+
