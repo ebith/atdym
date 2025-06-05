@@ -6,20 +6,26 @@ import { validator } from 'hono/validator'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { v4 as uuidv4 } from 'uuid'
+import App from './App'
+import Html from './Html'
+import Welcome from './Welcome'
+
+type Bindings = {
+  DB: Database
+}
 
 interface Env {
   DB: Database
 }
 
-import App from './App'
-import Html from './Html'
-import Welcome from './Welcome'
-
 const app = new Hono<{ Bindings: Env }>()
 app.use('/static/*', serveStatic())
-app.use('/{add|remove}', cors({
-  origin: '*'
-}))
+app.use(
+  '/{add|remove}',
+  cors({
+    origin: '*',
+  })
+)
 
 app.get('/', async (c) => {
   const content = ReactDOMServer.renderToString(<Welcome id={uuidv4()} />)
@@ -29,17 +35,18 @@ app.get('/', async (c) => {
 app.get('/:user{[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}}', async (c) => {
   const { user } = c.req.param()
   const { mode, title } = c.req.query()
+
   const { results } = await c.env.DB.prepare(
     `SELECT id, user, title, url FROM atdym WHERE user = ? ORDER BY id DESC LIMIT 100 ;`
   )
     .bind(user)
     .all()
-
   const content = ReactDOMServer.renderToString(
     <Html>
       <App list={results} mode={mode} title={title} />
     </Html>
   )
+
   return c.html('<!DOCTYPE html>' + content)
 })
 

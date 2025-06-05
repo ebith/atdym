@@ -6,9 +6,9 @@
   "main": "src/server.tsx",
   "scripts": {
     "build": "esbuild --bundle src/client.tsx --outfile=public/static/client.js --minify && postcss ./src/input.css -o ./public/static/style.css",
-    "deploy": "yarn build && NO_D1_WARNING=true wrangler publish",
+    "deploy": "yarn build && NO_D1_WARNING=true wrangler deploy",
     "dev": "yarn dev-css & yarn dev-js",
-    "dev-js": "esbuild --bundle src/client.tsx --outfile=public/static/client.js && NO_D1_WARNING=true wrangler dev src/server.tsx --local --persist",
+    "dev-js": "esbuild --bundle src/client.tsx --outfile=public/static/client.js && NO_D1_WARNING=true wrangler dev src/server.tsx --local",
     "dev-css": "tailwindcss -i src/input.css -o public/static/style.css --watch"
   },
   "dependencies": {
@@ -23,13 +23,12 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
     "autoprefixer": "^10.4.13",
-    "better-sqlite3": "7.6.2",
     "cssnano": "^5.1.14",
     "daisyui": "^2.41.0",
     "esbuild": "^0.15.14",
     "postcss-cli": "^10.0.0",
     "postcss-nested": "^6.0.0",
     "tailwindcss": "^3.2.4",
-    "wrangler": "^2.4.0"
+    "wrangler": "^4.19.1"
   }
 }

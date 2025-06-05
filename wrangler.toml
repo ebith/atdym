@@ -11,3 +11,6 @@ bucket = "./public"
 binding = "DB"
 database_name = "atdym"
 database_id = "0ab882db-69bb-4ece-8180-2312ae38f50f"
+
+[observability.logs]
+enabled = true
