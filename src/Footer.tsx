@@ -1,10 +1,11 @@
 import React from 'react'
 
+const temportaryStyleFix = { gridAutoFlow: 'column', margin: '0 1rem' }
 const Footer = (props) => {
   return (
     <>
       <div className="divider my-10"></div>
-      <footer className="footer">
+      <footer className="footer" style={temportaryStyleFix}>
         <div>
           <span className="footer-title">使い方</span>
           <a
@@ -49,7 +50,8 @@ const Footer = (props) => {
             タイトル付き
           </a>
           <a
-            className="link link-hover" href="https://github.com/ebith/atdym/blob/main/README.md#%E4%BD%BF%E3%81%84%E6%96%B9"
+            className="link link-hover"
+            href="https://github.com/ebith/atdym/blob/main/README.md#%E4%BD%BF%E3%81%84%E6%96%B9"
           >
             具体例
           </a>
