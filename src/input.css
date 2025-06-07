@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* touch device hover fix */
+@media screen and (max-width: 1024px) {
+  a:hover {
+    background-color: #fff !important;
+    color: rgb(51, 51, 51) !important;
+    text-decoration-line: none !important;
+  }
+}
