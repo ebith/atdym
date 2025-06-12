@@ -10,3 +10,8 @@
     text-decoration-line: none !important;
   }
 }
+
+#app {
+  overscroll-behavior: none;
+  overflow: hidden;
+}
