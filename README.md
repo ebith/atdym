@@ -27,19 +27,20 @@
 ```
 
 ## メモ 
+### Local development
 ```sh
 yarn install
-mkdir -p .wrangler/state/d1
-sqlite3 .wrangler/state/d1/DB.sqlite3 < ./data/createTable.sql
-sqlite3 .wrangler/state/d1/DB.sqlite3 < ./data/createIndex.sql
+yarn wrangler d1 execute atdym --local --file ./data/createTable.sql
+yarn wrangler d1 execute atdym --local --file ./data/createIndex.sql
 yarn dev
 ```
 
+### Deploy
 ```sh
 yarn wrangler d1 create atdym
 yarn wrangler d1 execute atdym --file ./data/createTable.sql
 yarn wrangler d1 execute atdym --file ./data/createIndex.sql
-yarn wrangler publish
+yarn deploy
 ```
 
 - RSS出力モードがあっても良いかもしれない
