@@ -32,8 +32,10 @@
 yarn install
 yarn wrangler d1 execute atdym --local --file ./data/createTable.sql
 yarn wrangler d1 execute atdym --local --file ./data/createIndex.sql
+yarn wrangler d1 execute atdym --local --file ./data/insertData.sql
 yarn dev
 ```
+open http://localhost:8787/00000000-0000-4000-8000-000000000000
 
 ### Deploy
 ```sh
