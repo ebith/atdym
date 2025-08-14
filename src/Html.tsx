@@ -5,6 +5,7 @@ const Html = (props) => {
     <html>
       <head>
         <meta charSet="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
         <meta name="description" content="Web app for read it later" />
         <link rel="alternate" href="https://github.com/ebith/atdym" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
