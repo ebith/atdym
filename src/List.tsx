@@ -23,8 +23,8 @@ const List = (props) => {
           <li key={v.id} className="border-b">
             <a
               href={v.url}
-              onClick={() => {
-                handleClick(v.id, v.user)
+              onClick={async () => {
+                await handleClick(v.id, v.user)
               }}
               className="link link-primary hover:bg-stone-50 py-2 link-hover"
             >
