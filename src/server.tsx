@@ -6,6 +6,7 @@ import { validator } from 'hono/validator'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { v4 as uuidv4 } from 'uuid'
+import { encode } from 'html-entities'
 import App from './App'
 import Html from './Html'
 import Welcome from './Welcome'
@@ -49,13 +50,16 @@ app.get('/:user{[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{
 app.post(
   '/add',
   validator((v) => ({
-    user: v.json('user').isRequired(),
+    user: v
+      .json('user')
+      .isRequired()
+      .match(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/),
     url: v.json('url').isRequired(),
   })),
   async (c) => {
     const { user, title, url } = await c.req.json()
     await c.env.DB.prepare(`INSERT INTO atdym(user, title, url) VALUES(?, ?, ?);`)
-      .bind(user, title?.slice(0, 128), url.slice(0, 512))
+      .bind(user, encode(title?.slice(0, 128)), url.slice(0, 512))
       .run()
     const count = (await c.env.DB.prepare(`SELECT COUNT(*) AS count FROM atdym WHERE user = ?;`)
       .bind(user)

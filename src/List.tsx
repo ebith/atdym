@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { decode } from 'html-entities'
 
 const List = (props) => {
   const [list, setList] = useState(props.list)
@@ -28,7 +29,7 @@ const List = (props) => {
               }}
               className="link link-primary hover:bg-stone-50 py-2 link-hover"
             >
-              {v.title || v.url}
+              {decode(v.title) || v.url}
             </a>
           </li>
         )
