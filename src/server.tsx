@@ -1,8 +1,8 @@
 import type { Database } from '@cloudflare/d1'
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
-import { serveStatic } from 'hono/serve-static.module'
-import { validator } from 'hono/validator'
+import { z } from 'zod'
+import { zValidator } from '@hono/zod-validator'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { v4 as uuidv4 } from 'uuid'
@@ -16,7 +16,6 @@ interface Env {
 }
 
 const app = new Hono<{ Bindings: Env }>()
-app.use('/static/*', serveStatic())
 app.use(
   '/{add|remove}',
   cors({
@@ -49,15 +48,9 @@ app.get('/:user{[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{
 
 app.post(
   '/add',
-  validator((v) => ({
-    user: v
-      .json('user')
-      .isRequired()
-      .match(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/),
-    url: v.json('url').isRequired(),
-  })),
+  zValidator('json', z.object({ user: z.uuidv4(), url: z.url(), title: z.string().optional() })),
   async (c) => {
-    const { user, title, url } = await c.req.json()
+    const { user, title, url } = await c.req.valid('json')
     await c.env.DB.prepare(`INSERT INTO atdym(user, title, url) VALUES(?, ?, ?);`)
       .bind(user, encode(title?.slice(0, 128)), url.slice(0, 512))
       .run()
@@ -75,20 +68,10 @@ app.post(
   }
 )
 
-app.post(
-  '/remove',
-  validator((v) => ({
-    id: v.json('id').isRequired().isNumeric(),
-    user: v
-      .json('user')
-      .isRequired()
-      .match(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/),
-  })),
-  async (c) => {
-    const { id, user } = await c.req.json()
-    await c.env.DB.prepare(`DELETE FROM atdym WHERE id = ? and user =?;`).bind(id, user).run()
-    return c.body('Removed')
-  }
-)
+app.post('/remove', zValidator('json', z.object({ user: z.uuidv4(), id: z.coerce.number() })), async (c) => {
+  const { id, user } = await c.req.valid('json')
+  await c.env.DB.prepare(`DELETE FROM atdym WHERE id = ? and user =?;`).bind(id, user).run()
+  return c.body('Removed')
+})
 
 export default app

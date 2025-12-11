@@ -12,6 +12,7 @@
   const title = document.getSelection().toString() || document.title || document.location.href
   const response = await fetch('https://atdym.feelmy.net/add', {
     method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       user: 'ユーザID',
       url: document.location.href,
@@ -42,7 +43,7 @@ open http://localhost:8787/00000000-0000-4000-8000-000000000000
 pnpm wrangler d1 create atdym
 pnpm wrangler d1 execute atdym --file ./data/createTable.sql
 pnpm wrangler d1 execute atdym --file ./data/createIndex.sql
-pnpm deploy
+pnpm run deploy
 ```
 
 - RSS出力モードがあっても良いかもしれない

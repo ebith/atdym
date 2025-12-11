@@ -8,6 +8,7 @@ const List = (props) => {
     if (props.mode === 'share') return
     const response = await fetch('/remove', {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: id.toString(), user: user }),
     })
     setList(

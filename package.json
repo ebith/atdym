@@ -5,18 +5,20 @@
   "author": "ebith <ebith.h@gmail.com>",
   "main": "src/server.tsx",
   "scripts": {
-    "build": "esbuild --bundle src/client.tsx --outfile=public/static/client.js --minify --target=ios15 && postcss ./src/input.css -o ./public/static/style.css",
+    "build": "esbuild --bundle src/client.tsx --outfile=public/client.js --minify --target=ios15 && postcss ./src/input.css -o ./public/style.css",
     "deploy": "pnpm build && NO_D1_WARNING=true wrangler deploy",
     "dev": "pnpm dev-css & pnpm dev-js",
-    "dev-js": "esbuild --bundle src/client.tsx --outfile=public/static/client.js && NO_D1_WARNING=true wrangler dev src/server.tsx --local",
-    "dev-css": "tailwindcss -i src/input.css -o public/static/style.css --watch"
+    "dev-js": "esbuild --bundle src/client.tsx --outfile=public/client.js && NO_D1_WARNING=true wrangler dev src/server.tsx --local",
+    "dev-css": "tailwindcss -i src/input.css -o public/style.css --watch"
   },
   "dependencies": {
-    "hono": "^2.5.2",
+    "@hono/zod-validator": "^0.7.5",
+    "hono": "^4.10.8",
     "html-entities": "^2.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "@cloudflare/d1": "^1.4.1",
