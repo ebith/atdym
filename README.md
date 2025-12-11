@@ -29,20 +29,20 @@
 ## メモ 
 ### Local development
 ```sh
-yarn install
-yarn wrangler d1 execute atdym --local --file ./data/createTable.sql
-yarn wrangler d1 execute atdym --local --file ./data/createIndex.sql
-yarn wrangler d1 execute atdym --local --file ./data/insertData.sql
-yarn dev
+pnpm install
+pnpm wrangler d1 execute atdym --local --file ./data/createTable.sql
+pnpm wrangler d1 execute atdym --local --file ./data/createIndex.sql
+pnpm wrangler d1 execute atdym --local --file ./data/insertData.sql
+pnpm dev
 ```
 open http://localhost:8787/00000000-0000-4000-8000-000000000000
 
 ### Deploy
 ```sh
-yarn wrangler d1 create atdym
-yarn wrangler d1 execute atdym --file ./data/createTable.sql
-yarn wrangler d1 execute atdym --file ./data/createIndex.sql
-yarn deploy
+pnpm wrangler d1 create atdym
+pnpm wrangler d1 execute atdym --file ./data/createTable.sql
+pnpm wrangler d1 execute atdym --file ./data/createIndex.sql
+pnpm deploy
 ```
 
 - RSS出力モードがあっても良いかもしれない
