@@ -7,9 +7,9 @@ const Welcome = (props) => {
         <meta charSet="utf-8" />
         <title>Atdym</title>
         <base target="_blank" />
-        <link href="/static/style.css" rel="stylesheet" />
-        <link rel="apple-touch-icon" href="/static/apple-touch-icon.png" />
-        <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+        <link href="/style.css" rel="stylesheet" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body>
         <div className="container mx-auto py-10">
