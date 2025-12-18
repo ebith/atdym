@@ -9,7 +9,8 @@
     "deploy": "pnpm build && NO_D1_WARNING=true wrangler deploy",
     "dev": "pnpm dev-css & pnpm dev-js",
     "dev-js": "esbuild --bundle src/client.tsx --outfile=public/client.js && NO_D1_WARNING=true wrangler dev src/server.tsx --local",
-    "dev-css": "tailwindcss -i src/input.css -o public/style.css --watch"
+    "dev-css": "tailwindcss -i src/input.css -o public/style.css --watch",
+    "bookmarklet": "esbuild --bundle bookmarklet.js --banner:js=javascript: --charset=utf8 --format=iife --minify"
   },
   "dependencies": {
     "@hono/zod-validator": "^0.7.5",

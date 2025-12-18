@@ -17,9 +17,7 @@ const Footer = (props) => {
               node &&
                 node.setAttribute(
                   'href',
-                  `javascript:void%20function(){(async()=%3E{const%20a=new%20SpeechSynthesisUtterance;a.lang=%22ja-JP%22;const%20b=await%20fetch(%22https://atdym.feelmy.net/add%22,{method:%22POST%22,body:JSON.stringify({user:%22${
-                    user![0]
-                  }%22,url:document.location.href,title:document.title||document.location.href})});200===b.status%3F(a.text=%22\u5F8C\u3067\u8AAD\u3080\u306B\u8FFD\u52A0\u3057\u307E\u3057\u305F%22,window.speechSynthesis.speak(a)):(a.text=%22\u5F8C\u3067\u8AAD\u3080\u306B\u8FFD\u52A0\u3067\u304D\u307E\u305B\u3093\u3067\u3057\u305F%22,window.speechSynthesis.speak(a))})()}();`
+                  `javascript:(()=>{(async()=>{let e=new SpeechSynthesisUtterance;e.lang="ja-JP",(await fetch("https://atdym.feelmy.net/add",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({user:"${user[0]}",url:document.location.href,title:document.title||document.location.href})})).status===200?(e.text="後で読むに追加しました",window.speechSynthesis.speak(e)):(e.text="後で読むに追加できませんでした",window.speechSynthesis.speak(e))})();})();`
                 )
             }}
           >

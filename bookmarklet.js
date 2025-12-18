@@ -3,6 +3,7 @@
   utter.lang = 'ja-JP'
   const response = await fetch('https://atdym.feelmy.net/add', {
     method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       user: `${props.list[0].user}`,
       url: document.location.href,
