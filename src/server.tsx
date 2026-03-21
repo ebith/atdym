@@ -52,7 +52,7 @@ app.post(
   async (c) => {
     const { user, title, url } = await c.req.valid('json')
     await c.env.DB.prepare(`INSERT INTO atdym(user, title, url) VALUES(?, ?, ?);`)
-      .bind(user, encode(title?.slice(0, 128)), url.slice(0, 512))
+      .bind(user, encode(title?.slice(0, 128), {mode: 'nonAsciiPrintableOnly'}), url.slice(0, 512))
       .run()
     const count = (await c.env.DB.prepare(`SELECT COUNT(*) AS count FROM atdym WHERE user = ?;`)
       .bind(user)
